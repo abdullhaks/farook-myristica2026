@@ -32,7 +32,7 @@ function LandingPage() {
     registrationService.getWelcomeMessage()
       .then((res) => {
         message.success({
-          content: res.message,
+          content: res.message || 'Welcome to Myristica Season 5!',
           style: {
             marginTop: '20px',
           },
