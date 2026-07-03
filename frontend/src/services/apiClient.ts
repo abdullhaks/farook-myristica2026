@@ -1,7 +1,10 @@
 import axios, { AxiosError } from 'axios';
 import { useAdminStore } from '../store/useAdminStore';
 
-const BASE_URL = 'http://localhost:3000';
+
+const API_BASE = import.meta.env.VITE_BACKEND_URL as string | undefined;
+
+const BASE_URL = API_BASE ?? 'http://localhost:3000';
 // const BASE_URL = 'https://myristica2026api.onrender.com';
 
 export const apiClient = axios.create({
