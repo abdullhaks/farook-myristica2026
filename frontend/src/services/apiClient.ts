@@ -14,6 +14,18 @@ export const apiClient = axios.create({
   withCredentials: true, // Important for cookies
 });
 
+// Intercept request to add token
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = useAdminStore.getState().accessToken;
+    if (token && config.headers) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 // Interceptor to handle 401 Unauthorized errors and refresh token
 apiClient.interceptors.response.use(
   (response) => response,
@@ -29,11 +41,21 @@ apiClient.interceptors.response.use(
       originalRequest._retry = true;
       
       try {
+        const store = useAdminStore.getState();
         // Attempt to refresh the token
-        await axios.post(`${BASE_URL}/admin/refresh-token`, {}, {
+        const refreshResponse = await axios.post(`${BASE_URL}/admin/refresh-token`, {
+          refresh_token: store.refreshToken
+        }, {
           withCredentials: true,
         });
         
+        if (refreshResponse.data.access_token) {
+          store.setTokens(refreshResponse.data.access_token, store.refreshToken || '');
+          if (originalRequest.headers) {
+            originalRequest.headers.Authorization = `Bearer ${refreshResponse.data.access_token}`;
+          }
+        }
+
         // If successful, retry the original request
         return apiClient(originalRequest);
       } catch (refreshError) {

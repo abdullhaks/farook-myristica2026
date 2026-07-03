@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button, message } from 'antd';
@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined, EyeOutlined, EyeInvisibleOutlined } from '@
 import { request } from '../../services/apiClient';
 import { useAdminStore } from '../../store/useAdminStore';
 
-const BackgroundOrbs = () => (
+const BackgroundOrbs = React.memo(() => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     <motion.div
       animate={{
@@ -15,7 +15,8 @@ const BackgroundOrbs = () => (
         y: [0, -50, 0],
       }}
       transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-      className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-green-600/20 rounded-full blur-[120px]"
+      style={{ willChange: "transform" }}
+      className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-green-600/20 rounded-full blur-[80px] md:blur-[120px]"
     />
     <motion.div
       animate={{
@@ -24,7 +25,8 @@ const BackgroundOrbs = () => (
         y: [0, 100, 0],
       }}
       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[150px]"
+      style={{ willChange: "transform" }}
+      className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[100px] md:blur-[150px]"
     />
      <motion.div
       animate={{
@@ -33,10 +35,11 @@ const BackgroundOrbs = () => (
         y: [0, 50, 0],
       }}
       transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-teal-500/10 rounded-full blur-[100px]"
+      style={{ willChange: "transform" }}
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-teal-500/10 rounded-full blur-[70px] md:blur-[100px]"
     />
   </div>
-);
+));
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
@@ -69,7 +72,7 @@ export default function AdminLogin() {
 
       if (res.success) {
         message.success(res.message || 'Logged in successfully');
-        setLogin(res.admin);
+        setLogin(res.admin, res.access_token, res.refresh_token);
         navigate('/home');
       }
     } catch (error: any) {
@@ -87,7 +90,7 @@ export default function AdminLogin() {
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full max-w-[420px] p-10 rounded-[2.5rem] bg-zinc-900/40 border border-white/10 backdrop-blur-3xl relative z-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] flex flex-col mx-4"
+        className="w-full max-w-[420px] p-10 rounded-[2.5rem] bg-zinc-900/40 border border-white/10 backdrop-blur-xl md:backdrop-blur-3xl relative z-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] flex flex-col mx-4"
       >
         {/* Glow effect behind the card */}
         <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>

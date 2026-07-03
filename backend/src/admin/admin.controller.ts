@@ -30,12 +30,12 @@ export class AdminController {
       maxAge: 2 * 24 * 60 * 60 * 1000, // 7 days
     });
 
-    return { success: true, message: 'Logged in successfully', admin };
+    return { success: true, message: 'Logged in successfully', admin, access_token, refresh_token };
   }
 
   @Post('refresh-token')
   async refreshToken(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    const refreshToken = req.cookies?.refresh_token;
+    const refreshToken = req.cookies?.refresh_token || req.body?.refresh_token;
     if (!refreshToken) {
       throw new UnauthorizedException('No refresh token found');
     }
@@ -49,7 +49,7 @@ export class AdminController {
       maxAge: 15 * 60 * 1000, // 15 minutes
     });
 
-    return { success: true, message: 'Token refreshed successfully' };
+    return { success: true, message: 'Token refreshed successfully', access_token };
   }
 
   @Post('logout')
