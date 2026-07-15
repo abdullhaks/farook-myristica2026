@@ -32,7 +32,7 @@ export default function Day2Events({ onRegisterClick }: Day2EventsProps) {
       <EventCard
         badge="DAY 2 · 1:00 PM – 2:00 PM · DEBATE"
         title="The Ecological Debate"
-        titleSerif="Samaram"
+        titleSerif="Ecoverse"
         description="Individual participants clash over pressing ecological and environmental questions. Sharpen your arguments — this is intellectual warfare for the planet."
         details={[
           { icon: '⏰', label: '1:00 PM – 2:00 PM' },

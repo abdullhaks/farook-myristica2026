@@ -47,7 +47,7 @@ export default function FounderSection() {
                 education into ecological action.
               </p>
               <p>
-                In 2017, he built the first Ecological Fiesta from the ground up,
+                In 2016, he built the first Ecological Fiesta from the ground up,
                 rallying fellow students, faculty, and the community around a
                 simple but radical idea: that a college festival could actually
                 matter for the planet.

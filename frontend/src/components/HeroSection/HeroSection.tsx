@@ -15,6 +15,9 @@ export default function HeroSection({ onRegisterClick }: HeroSectionProps) {
     const video = videoRef.current;
     if (!video) return;
 
+    // Set playback rate directly on the video element
+    video.playbackRate = 0.50;
+
     // Fade function using requestAnimationFrame
     const fadeTo = (targetOpacity: number, duration = 500) => {
       if (fadeAnimFrame.current) cancelAnimationFrame(fadeAnimFrame.current);
@@ -100,11 +103,12 @@ export default function HeroSection({ onRegisterClick }: HeroSectionProps) {
         muted
         playsInline
         crossOrigin="anonymous"
-        className="absolute inset-0 w-full h-full object-cover z-[1] pointer-events-none translate-y-[17%]"
+        className="absolute inset-0 w-full h-full object-cover z-[1] pointer-events-none "
         style={{ opacity: 0, mixBlendMode: 'screen' }}
       >
         <source
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4"
+          // src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4"
+          src="https://res.cloudinary.com/dklat3f8w/video/upload/v1784124640/hero5_asqwqv.mp4"
           type="video/mp4"
         />
       </video>

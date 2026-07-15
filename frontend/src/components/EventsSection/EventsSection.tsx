@@ -36,7 +36,7 @@ export default function EventsSection({ onRegisterClick }: EventsSectionProps) {
                     : 'text-[hsl(var(--muted-foreground))] hover:text-white'
                 }`}
               >
-                DAY 1 · AUG 5
+                DAY 1 · AUG 18
               </Tabs.Trigger>
               <Tabs.Trigger
                 value="day2"
@@ -46,7 +46,7 @@ export default function EventsSection({ onRegisterClick }: EventsSectionProps) {
                     : 'text-[hsl(var(--muted-foreground))] hover:text-white'
                 }`}
               >
-                DAY 2 · AUG 6
+                DAY 2 · AUG 19
               </Tabs.Trigger>
             </Tabs.List>
           </motion.div>

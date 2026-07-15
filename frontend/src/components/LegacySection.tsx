@@ -68,10 +68,10 @@ const milestones = [
     title: 'The Return',
     desc: 'Five years later. The ecological fiesta returns — with new urgency and the same unshakeable spirit.',
     stats: {
-      institutions: 80,
-      events: 15,
+      // institutions: 80,
+      // events: 15,
       students: 1000,
-      districts: 14,
+      districts: 10,
       isUpcoming: true,
     },
     side: 'left',
@@ -177,7 +177,7 @@ export default function LegacySection() {
 
                     {/* Season sub-stats grid */}
                     <div className="grid grid-cols-2 gap-4 border-t border-[hsl(var(--border))]/20 pt-4 mt-auto">
-                      <div className="flex items-center gap-2">
+                      {/* <div className="flex items-center gap-2">
                         <School className="w-4 h-4 text-white/40 shrink-0" />
                         <div>
                           <p className="text-[10px] text-[hsl(var(--muted-foreground))] font-light uppercase tracking-wider">Institutions</p>
@@ -194,7 +194,7 @@ export default function LegacySection() {
                             {milestone.stats.isUpcoming ? '15+' : milestone.stats.events.toString().padStart(2, '0')}
                           </p>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="flex items-center gap-2">
                         <Users className="w-4 h-4 text-white/40 shrink-0" />
                         <div>
@@ -209,7 +209,7 @@ export default function LegacySection() {
                         <div>
                           <p className="text-[10px] text-[hsl(var(--muted-foreground))] font-light uppercase tracking-wider">Districts</p>
                           <p className="text-xs font-semibold text-white/90">
-                            {milestone.stats.isUpcoming ? '14+' : milestone.stats.districts.toString().padStart(2, '0')}
+                            {milestone.stats.isUpcoming ? '10+' : milestone.stats.districts.toString().padStart(2, '0')}
                           </p>
                         </div>
                       </div>

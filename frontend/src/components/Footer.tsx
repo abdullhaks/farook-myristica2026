@@ -39,9 +39,11 @@ export default function Footer() {
         {/* Left */}
         <div className="flex flex-col gap-6">
           <a href="#hero" className="flex items-center gap-3 group">
-            <div className="relative w-7 h-7 rounded-full border-2 border-white/60 flex items-center justify-center">
-              <div className="w-3 h-3 rounded-full border border-white/60" />
-            </div>
+            <img
+              src="/Myristica_Icon.png"
+              alt="Myristica Logo"
+              className="h-10 transition-transform duration-1000 hover:scale-105 "
+            />
             <span className="font-serif italic text-xl font-normal tracking-wide">
               Myristica
             </span>
@@ -56,22 +58,7 @@ export default function Footer() {
         </div>
 
         {/* Center */}
-        <div className="flex flex-col md:items-center">
-          <ul className="flex flex-col gap-3">
-            {navLinks.map((link) => (
-              <li key={link}>
-                <a
-                  href={`#${link.toLowerCase()}`}
-                  className="text-[hsl(var(--muted-foreground))] text-sm hover:text-white transition-colors"
-                >
-                  {link}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
 
-        {/* Right */}
         <div className="flex flex-col md:items-end gap-6">
           <div className="flex items-center gap-3">
             {SocialIcons.map(({ icon, label }) => (
@@ -93,6 +80,26 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        
+         {/* Right */}
+        <div className="flex flex-col md:items-center">
+          <ul className="flex flex-col gap-3">
+            {navLinks.map((link) => (
+              <li key={link}>
+                <a
+                  href={`#${link.toLowerCase()}`}
+                  className="text-[hsl(var(--muted-foreground))] text-sm hover:text-white transition-colors"
+                >
+                  {link}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+       
+        
       </div>
     </footer>
   );

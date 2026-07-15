@@ -14,8 +14,8 @@ const cards = [
   {
     image:
       'kerala.jpg',
-    number: '40',
-    suffix: '%',
+    number: '6',
+    suffix: '.5-12%',
     title: "Of Kerala's native flora threatened",
     desc: 'The land of spices is losing its ancient green wealth.',
   },

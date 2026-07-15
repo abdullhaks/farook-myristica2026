@@ -44,17 +44,33 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.6 }}
+        className="flex items-center gap-2.5 mb-4 mt-28 px-4 py-1.5 rounded-full"
+      >
+        <img 
+          src="/magnolia.jpeg" 
+          alt="Magnolia" 
+          className="h-8 rounded-sm "
+        />
+        <span className="text-[10px] font-semibold tracking-[2px] uppercase text-white/80">
+          Magnolia 2.0 Association of Botany
+        </span>
+      </motion.div>
+
+      {/* <motion.div
+        initial={{ opacity: 0, y: -15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1, duration: 0.6 }}
         className="flex items-center gap-2.5 mb-4 mt-28 px-4 py-1.5 rounded-full bg-white/[0.02] border border-white/5 backdrop-blur-sm"
       >
         <img 
-          src="/clg.jpg" 
-          alt="Farook College Logo" 
+          src="/magnolia.jpeg" 
+          alt="Magnolia" 
           className="h-8 rounded-sm "
         />
         <span className="text-xs font-semibold tracking-[2px] uppercase text-white/80">
-          Farook College (Autonomous)
+          Magnolia 2.0 Association of Botany
         </span>
-      </motion.div>
+      </motion.div> */}
 
       {/* Season badge with Program Logo */}
       <motion.div
@@ -64,35 +80,60 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
         className="liquid-glass rounded-full px-4 py-1.5 flex items-center gap-2 mb-8"
       >
         <img 
-          src="/Myristica_Logo.png" 
+          src="/clg.jpg" 
           alt="Myristica Logo" 
           className="h-8"
         />
-        <span className="text-xs tracking-[3px] uppercase text-[hsl(var(--muted-foreground))]">
-          Season 5 · Aug 5–6, 2026
+        <span className="text-xs tracking-[3px] uppercase text-white">
+          Farook college (Autonomous), Kozhikode
         </span>
       </motion.div>
 
+
       {/* Main heading */}
       <h1 
-        className="text-5xl md:text-7xl lg:text-9xl tracking-[-3px] leading-[0.92] mb-8 font-serif"
+        className="text-5xl md:text-7xl lg:text-9xl tracking-[-3px] leading-[0.92] mb-1 font-serif"
         style={{ fontFamily: "'Instrument Serif', serif" }}
       >
         <span className="block">
           <AnimatedTitle text="Myristica" delayOffset={0.5} />
         </span>
-        <span className="block">
-          <AnimatedTitle text="The " delayOffset={0.8} />
+        <span className="block text-3xl md:text-5xl lg:text-7xl">
+          <AnimatedTitle text="Students’ " delayOffset={0.8} />
           <AnimatedTitle
-            text="Ecological"
+            text="Ecological "
+            className="italic font-normal"
+            delayOffset={0.9}
+          />
+          <AnimatedTitle
+            text="festival"
             className="italic font-normal"
             delayOffset={0.9}
           />
         </span>
-        <span className="block">
-          <AnimatedTitle text="Fiesta" delayOffset={1.2} />
-        </span>
+        {/* <span className="block text-3xl md:text-5xl lg:text-7xl">
+          <AnimatedTitle text="festival" delayOffset={1.2} />
+        </span> */}
       </h1>
+
+       <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="liquid-glass rounded-full px-4 py-1.5 flex items-center gap-2 mb-8"
+      >
+        <img 
+          src="/Myristica_Icon.png" 
+          alt="Myristica Logo" 
+          className="h-8"
+        />
+        {/* <span className="text-xs tracking-[3px] uppercase text-[hsl(var(--muted-foreground))]">
+          Season 5 · Aug 18–19, 2026
+        </span> */}
+        <span className="text-xs tracking-[3px] uppercase text-white/90">
+          Season 5 · Aug 18–19, 2026
+        </span>
+      </motion.div>
 
       {/* Subtitle */}
       <motion.p
@@ -115,7 +156,7 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
         className="flex flex-wrap justify-center gap-3 mb-10"
       >
         <div className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-[hsl(var(--muted-foreground))]">
-          <span>📅</span> 5 & 6 August 2026
+          <span>📅</span> 18 & 19 August 2026
         </div>
         <div className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-[hsl(var(--muted-foreground))]">
           <span>📍</span> Farook College, Kozhikode

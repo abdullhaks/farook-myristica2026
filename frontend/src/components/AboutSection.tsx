@@ -76,14 +76,11 @@ export default function AboutSection() {
           <div className="text-white/70 font-light text-sm sm:text-base md:text-lg leading-relaxed space-y-6">
             <p>
               Myristica — The Ecological Fiesta is a state-level ecological
-              festival organized by the Department of Botany, Farook College,
-              Kozhikode. Named after the genus of the nutmeg tree, Myristica
-              fragrans, this festival roots itself in Kerala's rich
-              biodiversity.
+              festival organized by the students of Department of Botany, Farook College, Kozhikode, in collaboration with the Malabar Natural History Society. Named after the threatened tree Myristica malabarica in the IUCN Redlist, this festival roots itself in Kerala's rich biodiversity.
             </p>
             <p>
-              After four successful seasons between 2017 and 2020, Myristica
-              Season 5 makes its long-awaited return on 5 & 6 August 2026 —
+              After four successful seasons between 2016 and 2020, Myristica
+              Season 5 makes its long-awaited return on 18 & 19 August 2026 —
               bigger, bolder, and more urgent than ever.
             </p>
             <p>
@@ -93,9 +90,7 @@ export default function AboutSection() {
                 United Nations Convention on Biological Diversity (CBD) Global
                 Action Map
               </strong>
-              . Through this recognition, Farook College has been officially
-              acknowledged as an Actor in the Worldwide Network on the UN CBD
-              platform.
+              . Through this recognition, Farook College has been officially acknowledged as an Actor in the Worldwide Network on the UN CBD platform, as part of the United Nations Decade on Biodiversity (2011–2020).
             </p>
           </div>
 

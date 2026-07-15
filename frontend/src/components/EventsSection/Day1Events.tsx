@@ -31,7 +31,7 @@ export default function Day1Events({ onRegisterClick }: Day1EventsProps) {
       <EventCard
         badge="DAY 1 · 10:00 AM – 12:00 PM · FAROOKIANS ONLY"
         title="Treasure Hunt"
-        titleSerif="Settaakkanam"
+        titleSerif="mystic hunt"
         description="Race through the college surroundings in a team of 4 — solving ecological riddles, tracking flora, and chasing clues hidden in plain sight."
         details={[
           { icon: '⏰', label: '10:00 AM – 12:00 PM' },
@@ -48,6 +48,7 @@ export default function Day1Events({ onRegisterClick }: Day1EventsProps) {
       <EventCard
         badge="DAY 1 · 1:00 PM – 2:30 PM · WORKSHOP"
         title="Terrarium Making Workshop"
+        titleSerif="Mosscape"
         description="Build a miniature ecosystem in a glass container. Learn the art of designing self-sustaining micro-worlds under expert guidance."
         details={[
           { icon: '⏰', label: '1:00 PM – 2:30 PM' },
@@ -62,7 +63,7 @@ export default function Day1Events({ onRegisterClick }: Day1EventsProps) {
       <EventCard
         badge="DAY 1 · 1:00 PM – 2:30 PM · ART COMPETITION"
         title="Vegetable Printing"
-        titleSerif="Settaakkanam"
+        titleSerif="impressa "
         description="Transform vegetables into stamps. Print your ecological imagination onto fabric — each piece a unique intersection of nature and art. Bring your own vegetables, paint, and carving materials. Cloth will be provided."
         details={[
           { icon: '⏰', label: '1:00 PM – 2:30 PM' },

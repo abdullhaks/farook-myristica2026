@@ -62,19 +62,19 @@ export default function Navbar({ onRegisterClick }: NavbarProps) {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-28 py-4 flex items-center justify-between transition-all duration-500 ${
-        scrolled ? 'backdrop-blur-[10px] bg-black/20' : ''
+        scrolled ? 'backdrop-blur-[5px] bg-black/10' : ''
       }`}
     >
       {/* Logo */}
       <a href="#hero" className="flex items-center gap-1 group">
         <img 
-          src="/Myristica_Icon.png" 
+          src="/Myristica_Logo.png" 
           alt="Myristica Logo" 
           className="h-10 transition-transform duration-1000 hover:scale-105 "
         />
-        <span className="font-serif italic text-lg font-normal tracking-wide">
+        {/* <span className="font-serif italic text-lg font-normal tracking-wide">
           Myristica
-        </span>
+        </span> */}
       </a>
 
       {/* Desktop Nav Links */}
