@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { z } from 'zod';
 import { Alert, message } from 'antd';
 import { registrationService } from '../services/registrationService';
+import Qrcode from '../assets/qrcode.jpeg'
+
 
 // Available events for registration (excluding photography which is a google form)
 export const REGISTERABLE_EVENTS = [
@@ -60,6 +62,7 @@ export default function RegisterModal({
 
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [paymentFile, setPaymentFile] = useState<File | null>(null);
 
   // Live validation states
   const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
@@ -98,6 +101,7 @@ export default function RegisterModal({
         whatsapp: '',
         eventName: selectedEvent,
       });
+      setPaymentFile(null);
       setValidationErrors([]);
       setTouchedFields({});
       setFieldErrors({});
@@ -116,6 +120,7 @@ export default function RegisterModal({
       college: isTreasureHunt ? 'Farook College' : (formData.college === 'Farook College' ? '' : formData.college),
     };
     
+    setPaymentFile(null); // Reset payment file when event changes
     setFormData(updatedData);
     setTouchedFields(prev => ({ ...prev, eventName: true }));
     runLiveValidation(updatedData);
@@ -199,9 +204,32 @@ export default function RegisterModal({
     }
 
     try {
-      const validatedData = result.data;
+      let validatedData = result.data;
+      
+      const requiresPayment = validatedData.eventName === 'Treasure Hunt' || validatedData.eventName === 'Vegetable Printing';
+      
+      if (requiresPayment && !paymentFile) {
+        setIsSubmitting(false);
+        message.error('Payment screenshot is required for this event.');
+        return;
+      }
+
+      let paymentScreenshotUrl = '';
+      if (requiresPayment && paymentFile) {
+        // Upload screenshot
+        const uploadResult = await registrationService.uploadScreenshot(paymentFile);
+        if (uploadResult && uploadResult.url) {
+          paymentScreenshotUrl = uploadResult.url;
+        } else {
+          throw new Error('Failed to upload payment screenshot');
+        }
+      }
+
       // Connect to the backend Registration API
-      const res = await registrationService.registerParticipant(validatedData);
+      const res = await registrationService.registerParticipant({
+        ...validatedData,
+        paymentScreenshot: paymentScreenshotUrl || undefined
+      });
 
       message.success(res.message || `Successfully registered for ${validatedData.eventName}!`);
       setIsSubmitting(false);
@@ -482,6 +510,63 @@ export default function RegisterModal({
                   )}
                 </div>
               </div>
+
+              {/* Payment Section */}
+              {(formData.eventName === 'Treasure Hunt' || formData.eventName === 'Vegetable Printing') && (
+                <div className="bg-white/5 border border-white/10 rounded-xl p-4 mt-4 space-y-4">
+                  <div className="flex items-start gap-4">
+                    <a href="upi://pay?pa=fathimashafla2302@okicici&pn=YOUR_NAME&cu=INR">
+                    <img src={Qrcode} alt="Payment QR" className="w-24 h-24 object-contain rounded-lg bg-white p-1" />
+                    </a>
+                    <div>
+                      <h4 className="text-sm font-bold text-white mb-1">Registration Fee: {formData.eventName === 'Treasure Hunt' ? '₹100 per team' : '₹50'}</h4>
+                      <p className="text-xs text-white/70 mb-1">Bank: South Indian Bank</p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="text-xs text-white/70">Acc Number: 0427053000008968</p>
+                        <button type="button" onClick={() => { navigator.clipboard.writeText('0427053000008968'); message.success('Account number copied!'); }} className="text-white/50 hover:text-white transition-colors" title="Copy Account Number">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                      </div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="text-xs text-white/70">IFSC Code: SIBL0000427</p>
+                        <button type="button" onClick={() => { navigator.clipboard.writeText('SIBL0000427'); message.success('IFSC code copied!'); }} className="text-white/50 hover:text-white transition-colors" title="Copy IFSC Code">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                      </div>
+                      <p className="text-xs text-white/70 mb-1">Acc Name: FATHIMA SHAFLA BAVUVALAPPIL</p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-xs text-white/70">UPI: fathimashafla2302@okicici</p>
+                        <a href="upi://pay?pa=fathimashafla2302@okicici&pn=FATHIMA%20SHAFLA%20BAVUVALAPPIL&cu=INR" className="text-white/50 hover:text-white transition-colors" title="Pay with UPI">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold tracking-wider uppercase text-white/60 mb-1">
+                      Upload Payment Screenshot (Max 5MB)
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/png, image/jpeg, image/jpg"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          if (file.size > 5 * 1024 * 1024) {
+                            message.error('File size must be less than 5MB');
+                            e.target.value = '';
+                            setPaymentFile(null);
+                            return;
+                          }
+                          setPaymentFile(file);
+                        }
+                      }}
+                      className="w-full text-sm text-white/70 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20 transition-all cursor-pointer"
+                      required
+                    />
+                  </div>
+                </div>
+              )}
 
               {/* Submit Button */}
               <div className="pt-4">

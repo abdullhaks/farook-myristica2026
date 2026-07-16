@@ -47,7 +47,7 @@ export default function CTASection({ onRegisterClick }: CTASectionProps) {
   }, []);
 
   return (
-    <section id="register" className="py-32 md:py-44 border-t border-[hsl(var(--border))]/30 overflow-hidden relative min-h-[600px] flex items-center justify-center">
+    <section id="register" className="py-20 md:py-28 border-t border-[hsl(var(--border))]/30 overflow-hidden relative min-h-[600px] flex items-center justify-center">
       {/* Background HLS Video */}
       <video
         ref={videoRef}

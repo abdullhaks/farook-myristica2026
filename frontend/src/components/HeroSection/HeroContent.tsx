@@ -1,4 +1,8 @@
 import { motion } from 'framer-motion';
+import { Mail } from 'lucide-react';
+
+
+import { InstagramOutlined } from '@ant-design/icons';
 
 const AnimatedTitle = ({
   text,
@@ -163,26 +167,51 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
         </div>
       </motion.div>
 
+      {/* Social / Contact pills */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2.1, duration: 0.6 }}
+        className="flex flex-wrap justify-center gap-3 mb-10"
+      >
+        <a 
+          href="https://instagram.com/myristica_botany" 
+          target="_blank" 
+          rel="noreferrer"
+          className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-[hsl(var(--muted-foreground))] hover:text-white transition-colors"
+        >
+          {/* <span className="font-bold">IG:</span> @myristica_botany */}
+          <InstagramOutlined color='white' size={16} /> @myristica_botany
+        </a>
+        <a 
+          href="mailto:botany@farookcollege.ac.in"
+          className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-[hsl(var(--muted-foreground))] hover:text-white transition-colors"
+        >
+          <Mail size={16} /> botany@farookcollege.ac.in
+        </a>
+      </motion.div>
+
       {/* CTA Buttons */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.2, duration: 0.6 }}
-        className="flex flex-wrap justify-center gap-4 mb-16"
+        className="flex flex-wrap justify-center gap-6 mb-16"
       >
         <motion.button
           onClick={onRegisterClick}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="bg-white text-black rounded-full px-8 py-3.5 font-semibold text-sm tracking-wide cursor-pointer text-center"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="relative group bg-white text-black rounded-full px-10 py-4 font-bold text-sm tracking-widest cursor-pointer text-center overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.4)] animate-pulse [animation-duration:2s] hover:animate-none hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] transition-all duration-300"
         >
-          REGISTER NOW
+          <span className="relative z-10">REGISTER NOW</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-white to-gray-200 opacity-0 group-hover:opacity-20 transition-opacity" />
         </motion.button>
         <motion.a
           href="#events"
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="liquid-glass rounded-full px-8 py-3.5 text-sm tracking-wide cursor-pointer text-center"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="relative liquid-glass rounded-full px-10 py-4 font-semibold text-sm tracking-widest cursor-pointer text-center hover:bg-white/10 border border-white/20 hover:border-white/40 transition-all duration-300"
         >
           EXPLORE EVENTS
         </motion.a>

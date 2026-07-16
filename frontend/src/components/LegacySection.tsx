@@ -68,10 +68,6 @@ const milestones = [
     title: 'The Return',
     desc: 'Five years later. The ecological fiesta returns — with new urgency and the same unshakeable spirit.',
     stats: {
-      // institutions: 80,
-      // events: 15,
-      students: 1000,
-      districts: 10,
       isUpcoming: true,
     },
     side: 'left',
@@ -135,7 +131,7 @@ export default function LegacySection() {
         </div>
 
         {/* Timeline */}
-        <div className="relative max-w-4xl mx-auto mb-32">
+        <div className="relative max-w-4xl mx-auto mb-20 md:mb-32">
           {/* Central Line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-[hsl(var(--border))]/40 -translate-x-1/2" />
 
@@ -176,44 +172,46 @@ export default function LegacySection() {
                     </div>
 
                     {/* Season sub-stats grid */}
-                    <div className="grid grid-cols-2 gap-4 border-t border-[hsl(var(--border))]/20 pt-4 mt-auto">
-                      {/* <div className="flex items-center gap-2">
-                        <School className="w-4 h-4 text-white/40 shrink-0" />
-                        <div>
-                          <p className="text-[10px] text-[hsl(var(--muted-foreground))] font-light uppercase tracking-wider">Institutions</p>
-                          <p className="text-xs font-semibold text-white/90">
-                            {milestone.stats.isUpcoming ? '80+' : milestone.stats.institutions.toString().padStart(2, '0')}
-                          </p>
+                    {!milestone.stats.isUpcoming && (
+                      <div className="grid grid-cols-2 gap-4 border-t border-[hsl(var(--border))]/20 pt-4 mt-auto">
+                        <div className="flex items-center gap-2">
+                          <School className="w-4 h-4 text-white/40 shrink-0" />
+                          <div>
+                            <p className="text-[10px] text-[hsl(var(--muted-foreground))] font-light uppercase tracking-wider">Institutions</p>
+                            <p className="text-xs font-semibold text-white/90">
+                              {milestone.stats.institutions?.toString().padStart(2, '0')}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Calendar className="w-4 h-4 text-white/40 shrink-0" />
+                          <div>
+                            <p className="text-[10px] text-[hsl(var(--muted-foreground))] font-light uppercase tracking-wider">Events</p>
+                            <p className="text-xs font-semibold text-white/90">
+                              {milestone.stats.events?.toString().padStart(2, '0')}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4 text-white/40 shrink-0" />
+                          <div>
+                            <p className="text-[10px] text-[hsl(var(--muted-foreground))] font-light uppercase tracking-wider">Students</p>
+                            <p className="text-xs font-semibold text-white/90">
+                              {milestone.stats.students?.toString()}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4 text-white/40 shrink-0" />
+                          <div>
+                            <p className="text-[10px] text-[hsl(var(--muted-foreground))] font-light uppercase tracking-wider">Districts</p>
+                            <p className="text-xs font-semibold text-white/90">
+                              {milestone.stats.districts?.toString().padStart(2, '0')}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-white/40 shrink-0" />
-                        <div>
-                          <p className="text-[10px] text-[hsl(var(--muted-foreground))] font-light uppercase tracking-wider">Events</p>
-                          <p className="text-xs font-semibold text-white/90">
-                            {milestone.stats.isUpcoming ? '15+' : milestone.stats.events.toString().padStart(2, '0')}
-                          </p>
-                        </div>
-                      </div> */}
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 text-white/40 shrink-0" />
-                        <div>
-                          <p className="text-[10px] text-[hsl(var(--muted-foreground))] font-light uppercase tracking-wider">Students</p>
-                          <p className="text-xs font-semibold text-white/90">
-                            {milestone.stats.isUpcoming ? '1000+' : milestone.stats.students.toString()}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-white/40 shrink-0" />
-                        <div>
-                          <p className="text-[10px] text-[hsl(var(--muted-foreground))] font-light uppercase tracking-wider">Districts</p>
-                          <p className="text-xs font-semibold text-white/90">
-                            {milestone.stats.isUpcoming ? '10+' : milestone.stats.districts.toString().padStart(2, '0')}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -221,35 +219,29 @@ export default function LegacySection() {
           </motion.div>
         </div>
 
-        {/* Image Collage */}
+        {/* Memory Gallery */}
+        <motion.div
+          {...fadeUp(0.2)}
+          className="text-center mb-10"
+        >
+          <h3 className="text-2xl md:text-4xl font-serif italic mb-4">Past Memories</h3>
+          <p className="text-[hsl(var(--muted-foreground))] text-sm">Glimpses from previous seasons of Myristica.</p>
+        </motion.div>
+
         <motion.div
           {...fadeUp(0.3)}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-center"
+          className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 pb-20"
         >
-          <div className="rounded-xl overflow-hidden aspect-[4/5] md:aspect-[3/4]">
-            <img
-              src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&q=80"
-              alt="Nature archive"
-              loading="lazy"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-            />
-          </div>
-          <div className="rounded-xl overflow-hidden aspect-square md:aspect-[4/5] md:-mt-12">
-            <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
-              alt="Person nature"
-              loading="lazy"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-            />
-          </div>
-          <div className="rounded-xl overflow-hidden aspect-[4/5] md:aspect-square">
-            <img
-              src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&q=80"
-              alt="Green scene"
-              loading="lazy"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-            />
-          </div>
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div key={i} className="break-inside-avoid rounded-xl overflow-hidden group">
+              <img
+                src={`/src/assets/gallary/img (${i + 1}).jpeg`}
+                alt={`Myristica Memory ${i + 1}`}
+                loading="lazy"
+                className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"
+              />
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

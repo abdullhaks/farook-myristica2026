@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import * as Tabs from '@radix-ui/react-tabs';
+import { motion } from 'framer-motion';
 import { fadeUp } from '../../lib/utils';
 import Day1Events from './Day1Events';
 import Day2Events from './Day2Events';
@@ -10,8 +8,6 @@ interface EventsSectionProps {
 }
 
 export default function EventsSection({ onRegisterClick }: EventsSectionProps) {
-  const [activeTab, setActiveTab] = useState('day1');
-
   return (
     <section
       id="events"
@@ -25,47 +21,41 @@ export default function EventsSection({ onRegisterClick }: EventsSectionProps) {
           EVENTS
         </motion.p>
 
-        <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
-          <motion.div {...fadeUp(0.1)} className="flex justify-center mb-12">
-            <Tabs.List className="flex items-center gap-4 bg-black border border-[hsl(var(--border))]/30 rounded-full p-1">
-              <Tabs.Trigger
-                value="day1"
-                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                  activeTab === 'day1'
-                    ? 'bg-foreground text-background'
-                    : 'text-[hsl(var(--muted-foreground))] hover:text-white'
-                }`}
-              >
-                DAY 1 · AUG 18
-              </Tabs.Trigger>
-              <Tabs.Trigger
-                value="day2"
-                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                  activeTab === 'day2'
-                    ? 'bg-foreground text-background'
-                    : 'text-[hsl(var(--muted-foreground))] hover:text-white'
-                }`}
-              >
-                DAY 2 · AUG 19
-              </Tabs.Trigger>
-            </Tabs.List>
-          </motion.div>
-
-          <div className="relative min-h-[500px]">
-            <AnimatePresence mode="wait">
-              {activeTab === 'day1' && (
-                <Tabs.Content key="day1" value="day1" forceMount>
-                  <Day1Events onRegisterClick={onRegisterClick} />
-                </Tabs.Content>
-              )}
-              {activeTab === 'day2' && (
-                <Tabs.Content key="day2" value="day2" forceMount>
-                  <Day2Events onRegisterClick={onRegisterClick} />
-                </Tabs.Content>
-              )}
-            </AnimatePresence>
+        <div className="flex flex-col gap-16 md:gap-24 relative min-h-[500px]">
+          <div>
+            <motion.h3 
+              {...fadeUp(0.1)} 
+              className="text-3xl md:text-5xl font-serif italic mb-2 tracking-tight"
+            >
+              Day 1
+            </motion.h3>
+            <motion.p 
+              {...fadeUp(0.15)} 
+              className="text-[hsl(var(--muted-foreground))] uppercase text-xs tracking-widest mb-8"
+            >
+              August 18, 2026
+            </motion.p>
+            <Day1Events onRegisterClick={onRegisterClick} />
           </div>
-        </Tabs.Root>
+          
+          <div className="w-full h-px bg-[hsl(var(--border))]/20" />
+
+          <div>
+            <motion.h3 
+              {...fadeUp(0.2)} 
+              className="text-3xl md:text-5xl font-serif italic mb-2 tracking-tight"
+            >
+              Day 2
+            </motion.h3>
+            <motion.p 
+              {...fadeUp(0.25)} 
+              className="text-[hsl(var(--muted-foreground))] uppercase text-xs tracking-widest mb-8"
+            >
+              August 19, 2026
+            </motion.p>
+            <Day2Events onRegisterClick={onRegisterClick} />
+          </div>
+        </div>
       </div>
     </section>
   );

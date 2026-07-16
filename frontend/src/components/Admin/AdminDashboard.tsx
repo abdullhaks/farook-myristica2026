@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Table, Button, Select, Popconfirm, message, Tag, Spin } from 'antd';
+import { Table, Button, Select, Popconfirm, message, Tag, Spin, Image } from 'antd';
 import { DeleteOutlined, PhoneOutlined, WhatsAppOutlined, MailOutlined, DownloadOutlined, UsergroupAddOutlined, FireOutlined, BankOutlined, RiseOutlined } from '@ant-design/icons';
 import { request } from '../../services/apiClient';
 import * as XLSX from 'xlsx';
@@ -135,6 +135,12 @@ export default function AdminDashboard() {
       render: (text: string) => <Tag color="green" className="bg-green-500/10 border-green-500/20 text-green-400 px-3 py-1 rounded-full">{text}</Tag>
     },
     { title: 'Phone', dataIndex: 'phone', key: 'phone' },
+    { 
+      title: 'Payment', 
+      dataIndex: 'paymentScreenshot', 
+      key: 'paymentScreenshot',
+      render: (url: string) => url ? <Image width={40} height={40} src={url} className="rounded object-cover" preview={{ mask: <span className="text-[10px]">View</span> }} /> : <span className="text-zinc-600 text-xs">N/A</span>
+    },
     {
       title: 'Actions',
       key: 'actions',

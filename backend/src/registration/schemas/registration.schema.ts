@@ -26,6 +26,9 @@ export class Registration extends Document {
 
   @Prop({ required: true })
   eventName: string;
+
+  @Prop({ required: false })
+  paymentScreenshot?: string;
 }
 
 export const RegistrationSchema = SchemaFactory.createForClass(Registration);

@@ -1,4 +1,4 @@
-import { request } from './apiClient';
+import { request, apiClient } from './apiClient';
 
 export interface WelcomeResponse {
   message: string;
@@ -13,6 +13,7 @@ export interface RegisterPayload {
   phone: string;
   whatsapp: string;
   eventName: string;
+  paymentScreenshot?: string;
 }
 
 export interface RegisterResponse {
@@ -50,5 +51,20 @@ export const registrationService = {
     return request<any>('/register', {
       method: 'GET',
     });
+  },
+
+  /**
+   * Uploads a screenshot to the backend and returns the URL
+   */
+  async uploadScreenshot(file: File): Promise<{ success: boolean; url: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    const response = await apiClient.post('/register/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
   },
 };

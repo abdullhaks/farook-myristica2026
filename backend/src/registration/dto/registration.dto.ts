@@ -26,6 +26,7 @@ export const registrationSchema = z.object({
   phone: z.string().regex(/^\d{10}$/, 'Phone number must be exactly 10 digits'),
   whatsapp: z.string().regex(/^\d{10}$/, 'WhatsApp number must be exactly 10 digits'),
   eventName: z.enum(REGISTERABLE_EVENTS),
+  paymentScreenshot: z.string().optional(),
 }).refine((data) => {
   if (data.eventName === 'Treasure Hunt') {
     return data.college.toLowerCase().includes('farook');
@@ -45,4 +46,5 @@ export class RegistrationDto {
   phone: string;
   whatsapp: string;
   eventName: typeof REGISTERABLE_EVENTS[number];
+  paymentScreenshot?: string;
 }

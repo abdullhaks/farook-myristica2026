@@ -39,6 +39,7 @@ export default function Day1Events({ onRegisterClick }: Day1EventsProps) {
           { icon: '👥', label: 'Team of 4' },
           { icon: '💰', label: '₹100 per team' },
         ]}
+        restrictionFee="₹100 per team"
         prizes="1st Prize: ₹1,000"
         restriction="FAROOKIANS ONLY"
         image="tressure.jpg"
@@ -75,25 +76,17 @@ export default function Day1Events({ onRegisterClick }: Day1EventsProps) {
         onRegisterClick={() => onRegisterClick('Vegetable Printing')}
       />
 
-      <div className="border border-[hsl(var(--border))]/30 rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-black">
-        <div>
-          <div className="flex items-center gap-2 text-sm text-[hsl(var(--muted-foreground))] mb-2">
-            <span>🎓</span> Valedictory Function
-          </div>
-          <p className="text-white text-base">
-            Celebrating the day's achievements, prize distribution, and
-            reflection.
-          </p>
-        </div>
-        <div className="flex flex-col md:items-end gap-2 text-sm">
-          <div className="liquid-glass rounded-full px-4 py-1">
-            3:00 PM – 4:00 PM · Auditorium
-          </div>
-          <div className="bg-white/5 text-white/60 text-xs px-3 py-1 rounded-full uppercase tracking-wider">
-            Free to all
-          </div>
-        </div>
-      </div>
+      <EventCard
+        badge="DAY 1 · 3:00 PM – 4:00 PM · FREE TO ALL"
+        title="Valedictory Function"
+        description="Celebrating the day's achievements, prize distribution, and reflection."
+        details={[
+          { icon: '⏰', label: '3:00 PM – 4:00 PM' },
+          { icon: '📍', label: 'Auditorium' },
+          { icon: '🎓', label: 'Free to all' },
+        ]}
+        layout="row"
+      />
     </motion.div>
   );
 }

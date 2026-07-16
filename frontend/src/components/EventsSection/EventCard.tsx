@@ -8,6 +8,7 @@ export interface EventCardProps {
   details: Array<string | { icon: string; label: string }>;
   prizes?: string;
   fee?: string;
+  restrictionFee?:string;
   restriction?: string;
   image?: string;
   registerUrl?: string;
@@ -23,6 +24,7 @@ export default function EventCard({
   details,
   prizes,
   fee,
+  restrictionFee,
   restriction,
   image,
   registerUrl = '#register',
@@ -70,7 +72,7 @@ export default function EventCard({
           ))}
         </div>
 
-        {(prizes || restriction || fee) && (
+        {(prizes || restriction || fee || restrictionFee) && (
           <div className="flex flex-wrap items-center gap-4 mb-6">
             {prizes && <div className="text-lg font-semibold">{prizes}</div>}
             {restriction && (
@@ -78,9 +80,9 @@ export default function EventCard({
                 {restriction}
               </div>
             )}
-            {fee && (
+            {(fee || restrictionFee) && (
               <div className="text-sm text-[hsl(var(--muted-foreground))]">
-                {fee}
+                {fee || restrictionFee}
               </div>
             )}
           </div>
