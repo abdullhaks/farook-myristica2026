@@ -23,6 +23,14 @@ export class RegistrationService {
     return this.registrationRepository.create(dto);
   }
 
+  async checkExisting(email: string, eventName: string) {
+    const existing = await this.registrationRepository.findByEmailAndEvent(email, eventName);
+    if (existing) {
+      throw new ConflictException(`You are already registered for ${eventName} with this email address.`);
+    }
+    return false;
+  }
+
   async getAllRegistrations(): Promise<Registration[]> {
     return this.registrationRepository.findAll();
   }

@@ -25,6 +25,12 @@ export class RegistrationController {
     };
   }
 
+  @Post('check')
+  async check(@Body() dto: { email: string, eventName: string }) {
+    await this.registrationService.checkExisting(dto.email, dto.eventName);
+    return { success: true };
+  }
+
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   async uploadScreenshot(@UploadedFile() file: Express.Multer.File) {

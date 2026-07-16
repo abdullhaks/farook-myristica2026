@@ -63,6 +63,7 @@ export default function RegisterModal({
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentFile, setPaymentFile] = useState<File | null>(null);
+  const [isQrModalOpen, setIsQrModalOpen] = useState(false);
 
   // Live validation states
   const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
@@ -207,6 +208,9 @@ export default function RegisterModal({
       let validatedData = result.data;
       
       const requiresPayment = validatedData.eventName === 'Treasure Hunt' || validatedData.eventName === 'Vegetable Printing';
+
+      // Pre-check registration to avoid uploading if already registered
+      await registrationService.checkRegistration(validatedData.email, validatedData.eventName);
       
       if (requiresPayment && !paymentFile) {
         setIsSubmitting(false);
@@ -252,7 +256,7 @@ export default function RegisterModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pt-80 overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pt-[500px] overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -515,9 +519,9 @@ export default function RegisterModal({
               {(formData.eventName === 'Treasure Hunt' || formData.eventName === 'Vegetable Printing') && (
                 <div className="bg-white/5 border border-white/10 rounded-xl p-4 mt-4 space-y-4">
                   <div className="flex items-start gap-4">
-                    <a href="upi://pay?pa=fathimashafla2302@okicici&pn=YOUR_NAME&cu=INR">
-                    <img src={Qrcode} alt="Payment QR" className="w-24 h-24 object-contain rounded-lg bg-white p-1" />
-                    </a>
+                    <button type="button" onClick={() => setIsQrModalOpen(true)} className="focus:outline-none hover:opacity-80 transition-opacity">
+                      <img src={Qrcode} alt="Payment QR" className="w-24 h-24 object-contain rounded-lg bg-white p-1" />
+                    </button>
                     <div>
                       <h4 className="text-sm font-bold text-white mb-1">Registration Fee: {formData.eventName === 'Treasure Hunt' ? '₹100 per team' : '₹50'}</h4>
                       <p className="text-xs text-white/70 mb-1">Bank: South Indian Bank</p>
@@ -536,9 +540,9 @@ export default function RegisterModal({
                       <p className="text-xs text-white/70 mb-1">Acc Name: FATHIMA SHAFLA BAVUVALAPPIL</p>
                       <div className="flex items-center gap-2">
                         <p className="text-xs text-white/70">UPI: fathimashafla2302@okicici</p>
-                        <a href="upi://pay?pa=fathimashafla2302@okicici&pn=FATHIMA%20SHAFLA%20BAVUVALAPPIL&cu=INR" className="text-white/50 hover:text-white transition-colors" title="Pay with UPI">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                        </a>
+                        <button type="button" onClick={() => { navigator.clipboard.writeText('fathimashafla2302@okicici'); message.success('UPI ID copied!'); }} className="text-white/50 hover:text-white transition-colors" title="Copy UPI ID">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -590,6 +594,38 @@ export default function RegisterModal({
               </div>
             </form>
           </motion.div>
+
+          {/* QR Code Modal */}
+          <AnimatePresence>
+            {isQrModalOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
+                onClick={() => setIsQrModalOpen(false)}
+              >
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  className="relative max-w-sm w-full bg-white rounded-2xl p-4"
+                  onClick={e => e.stopPropagation()}
+                >
+                  <button
+                    onClick={() => setIsQrModalOpen(false)}
+                    className="absolute -top-12 right-0 text-white hover:text-white/70 p-2"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  </button>
+                  <img src={Qrcode} alt="Payment QR Full" className="w-full h-auto object-contain rounded-lg" />
+                  <p className="text-center text-black font-semibold mt-4 mb-2">Scan to Pay</p>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       )}
     </AnimatePresence>

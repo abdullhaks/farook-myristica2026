@@ -55,7 +55,7 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
           alt="Magnolia" 
           className="h-8 rounded-sm "
         />
-        <span className="text-[10px] font-semibold tracking-[2px] uppercase text-white/80">
+        <span className="text-[6px] md:text-[10px] font-semibold tracking-[2px] uppercase text-white/80">
           Magnolia 2.0 Association of Botany
         </span>
       </motion.div>
@@ -88,7 +88,7 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
           alt="Myristica Logo" 
           className="h-8"
         />
-        <span className="text-xs tracking-[3px] uppercase text-white">
+        <span className="text-[8px] md:text-xs tracking-[3px] uppercase text-white">
           Farook college (Autonomous), Kozhikode
         </span>
       </motion.div>
@@ -99,11 +99,11 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
         className="text-5xl md:text-7xl lg:text-9xl tracking-[-3px] leading-[0.92] mb-1 font-serif"
         style={{ fontFamily: "'Instrument Serif', serif" }}
       >
-        <span className="block">
+        <span className="block text-7xl md:text-9xl">
           <AnimatedTitle text="Myristica" delayOffset={0.5} />
         </span>
         <span className="block text-3xl md:text-5xl lg:text-7xl">
-          <AnimatedTitle text="Students’ " delayOffset={0.8} />
+          <AnimatedTitle text="Students' " delayOffset={0.8} />
           <AnimatedTitle
             text="Ecological "
             className="italic font-normal"
@@ -134,7 +134,7 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
         {/* <span className="text-xs tracking-[3px] uppercase text-[hsl(var(--muted-foreground))]">
           Season 5 · Aug 18–19, 2026
         </span> */}
-        <span className="text-xs tracking-[3px] uppercase text-white/90">
+        <span className="text-[6px] md:text-xs tracking-[3px] uppercase text-white/90">
           Season 5 · Aug 18–19, 2026
         </span>
       </motion.div>
@@ -175,19 +175,19 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
         className="flex flex-wrap justify-center gap-3 mb-10"
       >
         <a 
-          href="https://instagram.com/myristica_botany" 
+          href="https://instagram.com/myristica_season.5" 
           target="_blank" 
           rel="noreferrer"
-          className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-[hsl(var(--muted-foreground))] hover:text-white transition-colors"
+          className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-[6px] md:text-xs text-[hsl(var(--muted-foreground))] hover:text-white transition-colors"
         >
           {/* <span className="font-bold">IG:</span> @myristica_botany */}
-          <InstagramOutlined color='white' size={16} /> @myristica_botany
+          <InstagramOutlined color='white' size={16} /> @myristica_season.5
         </a>
         <a 
-          href="mailto:botany@farookcollege.ac.in"
-          className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-[hsl(var(--muted-foreground))] hover:text-white transition-colors"
+          href="mailto:myristicafc@gmail.com"
+          className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-[6px] md:text-xs text-[hsl(var(--muted-foreground))] hover:text-white transition-colors"
         >
-          <Mail size={16} /> botany@farookcollege.ac.in
+          <Mail size={16} /> myristicafc@gmail.com
         </a>
       </motion.div>
 

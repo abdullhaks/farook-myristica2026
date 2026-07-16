@@ -10,6 +10,25 @@ const totals = [
   { label: 'Events Hosted', value: 13, suffix: '', icon: Calendar },
 ];
 
+const images =[
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211112/img_19_om31nz.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211112/img_20_dbzsq3.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211111/img_17_habumc.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211111/img_16_bcxhnn.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211110/img_14_fdt7um.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211110/img_11_kzyaub.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211109/img_10_yl1ngc.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211109/img_8_tefeah.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211109/img_6_qfcj90.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211109/img_9_cide7o.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211108/img_5_m0jnlp.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211108/img_3_inu0pk.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211108/img_4_cnlrs4.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211108/img_2_khktyu.jpg',
+'https://res.cloudinary.com/dklat3f8w/image/upload/v1784211107/img_1_frpbxq.jpg'
+
+];
+
 const milestones = [
   {
     season: 'SEASON 1 · 2016-2017',
@@ -232,10 +251,10 @@ export default function LegacySection() {
           {...fadeUp(0.3)}
           className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 pb-20"
         >
-          {Array.from({ length: 20 }).map((_, i) => (
+          {images.map((src, i) => (
             <div key={i} className="break-inside-avoid rounded-xl overflow-hidden group">
               <img
-                src={`/src/assets/gallary/img (${i + 1}).jpeg`}
+                src={src}
                 alt={`Myristica Memory ${i + 1}`}
                 loading="lazy"
                 className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"

@@ -45,6 +45,16 @@ export const registrationService = {
   },
 
   /**
+   * Checks if a participant is already registered for an event
+   */
+  async checkRegistration(email: string, eventName: string): Promise<any> {
+    return request<any>('/register/check', {
+      method: 'POST',
+      body: JSON.stringify({ email, eventName }),
+    });
+  },
+
+  /**
    * Fetches all registrations (for the future admin dashboard)
    */
   async getAllRegistrations(): Promise<any> {
