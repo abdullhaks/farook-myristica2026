@@ -181,7 +181,7 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
           className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-[6px] md:text-xs text-[hsl(var(--muted-foreground))] hover:text-white transition-colors"
         >
           {/* <span className="font-bold">IG:</span> @myristica_botany */}
-          <InstagramOutlined color='white' size={16} /> @myristica_season.5
+          <InstagramOutlined color='white' style={{fontSize:18}} /> @myristica_season.5
         </a>
         <a 
           href="mailto:myristicafc@gmail.com"
