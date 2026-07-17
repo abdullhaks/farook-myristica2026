@@ -22,7 +22,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
         
         {/* Left */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col justify-center items-center gap-4">
           <a href="#hero" className="flex items-center gap-3 group">
             <img
               src="/Myristica_Icon.png"
@@ -33,7 +33,7 @@ export default function Footer() {
               Myristica
             </span>
           </a>
-          <p className="text-[hsl(var(--muted-foreground))] text-sm leading-relaxed max-w-sm">
+          <p className="text-[hsl(var(--muted-foreground))] text-center text-sm leading-relaxed max-w-sm">
             The Ecological Fiesta · Department of Botany, Farook College,
             Kozhikode, Kerala
           </p>
@@ -44,7 +44,7 @@ export default function Footer() {
 
         {/* Center */}
 
-        <div className="flex flex-col md:items-center gap-6">
+        <div className="flex flex-col justify-center items-center gap-2">
           <div className="flex items-center gap-3">
             {SocialIcons.map(({ icon, label, link }) => (
               <a
@@ -63,7 +63,7 @@ export default function Footer() {
               <span className="text-red-400 mx-1">♥</span> 
               and endless cups of chai
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center items-center">
               <a href="https://wa.me/+918594043859" className="hover:text-white transition-colors">Contact</a>
             </div>
           </div>
@@ -71,13 +71,13 @@ export default function Footer() {
 
         
          {/* Right */}
-        <div className="flex flex-col md:items-center">
-          <ul className="flex flex-col gap-3">
+        <div className="flex flex-col justify-center items-center gap-2 md:items-center">
+          <ul className="grid grid-cols-2 gap-3">
             {navLinks.map((link) => (
               <li key={link}>
                 <a
                   href={`#${link.toLowerCase()}`}
-                  className="text-[hsl(var(--muted-foreground))] text-sm hover:text-white transition-colors"
+                  className="text-[hsl(var(--muted-foreground))] text-sm  hover:text-white transition-colors"
                 >
                   {link}
                 </a>

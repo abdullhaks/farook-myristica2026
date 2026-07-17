@@ -24,7 +24,7 @@ export default function Day2Events({ onRegisterClick }: Day2EventsProps) {
           { icon: '👥', label: 'Team of 2 or individual' },
         ]}
         prizes="1st: ₹3,000 · 2nd: ₹2,000 · 3rd: ₹1,000"
-        image="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=500&q=80"
+        image="/quiz1.jpg"
         layout="row"
         onRegisterClick={() => onRegisterClick('The Big Quiz')}
       />

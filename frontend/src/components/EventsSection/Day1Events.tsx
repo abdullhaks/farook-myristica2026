@@ -98,7 +98,7 @@ export default function Day1Events({ onRegisterClick }: Day1EventsProps) {
           { icon: '👤', label: 'Individual participation' },
         ]}
         prizes="1st: ₹1,000 · 2nd: ₹500"
-        image="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=500&q=80"
+        image="debate.jpg"
         onRegisterClick={() => onRegisterClick('The Ecological Debate')}
       />
 

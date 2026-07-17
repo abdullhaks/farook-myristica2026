@@ -346,7 +346,6 @@ export default function AdminDashboard() {
               size="large"
             >
               <Option value="All">All Events</Option>
-              <Option value="Terrarium Making Workshop">Terrarium Making Workshop</Option>
               <Option value="Vegetable Printing">Vegetable Printing</Option>
               <Option value="Treasure Hunt">Treasure Hunt</Option>
               <Option value="The Big Quiz">The Big Quiz</Option>

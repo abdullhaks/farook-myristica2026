@@ -9,7 +9,6 @@ import Qrcode from '../assets/qrcode.jpeg'
 // Available events for registration (excluding photography which is a google form)
 export const REGISTERABLE_EVENTS = [
   'Treasure Hunt',
-  'Terrarium Making Workshop',
   'Vegetable Printing',
   'The Big Quiz',
   'The Ecological Debate',
@@ -370,7 +369,7 @@ export default function RegisterModal({
               {/* College Input */}
               <div>
                 <label className="block text-xs font-semibold tracking-wider uppercase text-white/60 mb-1">
-                  College Name
+                  College Name & Place
                 </label>
                 <input
                   type="text"
@@ -378,7 +377,7 @@ export default function RegisterModal({
                   value={formData.college || ''}
                   onChange={handleInputChange}
                   onBlur={handleInputBlur}
-                  placeholder="e.g., Farook College"
+                  placeholder="e.g., Farook College, Kozhikode"
                   disabled={formData.eventName === 'Treasure Hunt'}
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                   required
@@ -458,7 +457,7 @@ export default function RegisterModal({
                     <option value="3rd Year UG" className="bg-black text-white">3rd Year UG</option>
                     <option value="1st Year PG" className="bg-black text-white">1st Year PG</option>
                     <option value="2nd Year PG" className="bg-black text-white">2nd Year PG</option>
-                    <option value="Research Scholar" className="bg-black text-white">Research Scholar</option>
+                    {/* <option value="Research Scholar" className="bg-black text-white">Research Scholar</option> */}
                   </select>
                   {(touchedFields.year || submitAttempted) && fieldErrors.year && (
                     <span className="text-xs text-red-400 mt-1 block">
