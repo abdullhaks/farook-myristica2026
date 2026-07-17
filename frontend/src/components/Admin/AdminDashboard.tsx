@@ -182,7 +182,7 @@ export default function AdminDashboard() {
           <a href={`tel:${record.phone}`} title="Call">
             <Button type="default" shape="circle" icon={<PhoneOutlined />} size="small" className="bg-white/5 border-white/10 hover:border-white/30 text-white" />
           </a>
-          <a href={`https://wa.me/${record.whatsapp}`} target="_blank" rel="noreferrer" title="WhatsApp">
+          <a href={`https://wa.me/+91${record.whatsapp}`} target="_blank" rel="noreferrer" title="WhatsApp">
             <Button type="default" shape="circle" icon={<WhatsAppOutlined />} size="small" className="bg-green-500/10 border-green-500/30 hover:border-green-500 text-green-500" />
           </a>
           <a href={`mailto:${record.email}`} title="Email">

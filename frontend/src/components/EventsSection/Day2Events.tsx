@@ -17,7 +17,7 @@ export default function Day2Events({ onRegisterClick }: Day2EventsProps) {
       <EventCard
         badge="DAY 2 · FLAGSHIP EVENT · QUIZ"
         title="The Big Quiz"
-        description="The premier ecological quiz of the season. Test your knowledge of biodiversity, conservation, flora, fauna, and environmental science. (Registration: 9:30 AM – 10:00 AM | Preliminary: 10:00 AM – 10:30 AM | Final: 11:00 AM – 12:30 PM)"
+        description="The premier ecological quiz of the season. Test your knowledge of biodiversity, conservation, flora, fauna, and environmental science. (Registration: 9:30 AM – 10:00 AM | Prelims: 10:00 AM – 10:30 AM | Finals: 11:00 AM – 12:30 PM)"
         details={[
           { icon: '📍', label: 'Auditorium' },
           { icon: '💰', label: '₹100 per head' },
@@ -25,7 +25,6 @@ export default function Day2Events({ onRegisterClick }: Day2EventsProps) {
         ]}
         prizes="1st: ₹3,000 · 2nd: ₹2,000 · 3rd: ₹1,000"
         image="/quiz1.jpg"
-        layout="row"
         onRegisterClick={() => onRegisterClick('The Big Quiz')}
       />
 
@@ -54,7 +53,6 @@ export default function Day2Events({ onRegisterClick }: Day2EventsProps) {
           { icon: '🎓', label: 'Free to all' },
         ]}
         image="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=80"
-        layout="row"
         hideRegister={true}
       />
     </motion.div>

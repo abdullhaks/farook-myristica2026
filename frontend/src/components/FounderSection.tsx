@@ -64,7 +64,7 @@ export default function FounderSection() {
               {...fadeUp(0.4)}
               className="liquid-glass rounded-full px-5 py-2.5 inline-block text-sm text-[hsl(var(--muted-foreground))]"
             >
-              JITHIN · Founder, Myristica · Dept. of Botany, Farook College
+              JITHIN · Founder, Myristica · Dept. of Botany 2016-19, Farook College.
             </motion.div>
           </div>
 
@@ -86,8 +86,12 @@ export default function FounderSection() {
               </span> */}
             </div>
 
-            <p className="text-sm text-[hsl(var(--muted-foreground))] tracking-wide">
+            <p className="text-sm text-[hsl(var(--muted-foreground))] tracking-wide pb-2">
               Jithin · Founder, Myristica
+            </p>
+
+            <p className="text-sm text-white/90 tracking-wide text-center">
+              Doctoral Researcher, Department of Biodiversity Sciences, University of Turku, Finland.
             </p>
 
             {/* Floating decorative leaves */}

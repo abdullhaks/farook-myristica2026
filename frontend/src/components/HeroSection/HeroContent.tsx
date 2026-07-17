@@ -55,7 +55,7 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
           alt="Magnolia" 
           className="h-8 rounded-sm "
         />
-        <span className="text-[6px] md:text-[10px] font-semibold tracking-[2px] uppercase text-white/80">
+        <span className="text-[8px] md:text-[10px] font-bold tracking-[2px] uppercase text-white">
           Magnolia 2.0 Association of Botany
         </span>
       </motion.div>
@@ -88,7 +88,7 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
           alt="Myristica Logo" 
           className="h-8"
         />
-        <span className="text-[8px] md:text-xs tracking-[3px] uppercase text-white">
+        <span className="text-[10px] md:text-xs tracking-[3px] uppercase text-white">
           Farook college (Autonomous), Kozhikode
         </span>
       </motion.div>
@@ -126,15 +126,15 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
         transition={{ delay: 0.3, duration: 0.6 }}
         className="liquid-glass rounded-full px-4 py-1.5 flex items-center gap-2 mb-8"
       >
-        <img 
+        {/* <img 
           src="/Myristica_Icon.png" 
           alt="Myristica Logo" 
           className="h-8"
-        />
+        /> */}
         {/* <span className="text-xs tracking-[3px] uppercase text-[hsl(var(--muted-foreground))]">
           Season 5 · Aug 18–19, 2026
         </span> */}
-        <span className="text-[6px] md:text-xs tracking-[3px] uppercase text-white/90">
+        <span className="text-[8px] md:text-xs tracking-[3px] uppercase text-white">
           Season 5 · Aug 18–19, 2026
         </span>
       </motion.div>
@@ -144,7 +144,7 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.8, duration: 0.7 }}
-        className="text-lg max-w-2xl mx-auto mb-8"
+        className="text-sm max-w-2xl mx-auto mb-8"
         style={{ color: 'hsl(var(--hero-subtitle))' }}
       >
         Kerala's only event on the United Nations CBD Global Action Map. A
@@ -159,10 +159,10 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
         transition={{ delay: 2.0, duration: 0.6 }}
         className="flex flex-wrap justify-center gap-3 mb-10"
       >
-        <div className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-[hsl(var(--muted-foreground))]">
+        <div className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-white">
           <span>📅</span> 18 & 19 August 2026
         </div>
-        <div className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-[hsl(var(--muted-foreground))]">
+        <div className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-white">
           <span>📍</span> Farook College, Kozhikode
         </div>
       </motion.div>
@@ -178,16 +178,16 @@ export default function HeroContent({ onRegisterClick }: HeroContentProps) {
           href="https://instagram.com/myristica_season.5" 
           target="_blank" 
           rel="noreferrer"
-          className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-[6px] md:text-xs text-[hsl(var(--muted-foreground))] hover:text-white transition-colors"
+          className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-[8px] md:text-xs text-white hover:text-white transition-colors"
         >
           {/* <span className="font-bold">IG:</span> @myristica_botany */}
-          <InstagramOutlined color='white' style={{fontSize:18}} /> @myristica_season.5
+          <InstagramOutlined  style={{fontSize:18 , color:"#f15972ff"}} /> @myristica_season.5
         </a>
         <a 
           href="mailto:myristicafc@gmail.com"
-          className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-[6px] md:text-xs text-[hsl(var(--muted-foreground))] hover:text-white transition-colors"
+          className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-2 text-[8px] md:text-xs text-white hover:text-white transition-colors"
         >
-          <Mail size={16} /> myristicafc@gmail.com
+          <Mail size={16} style={{color:"#79acf4ff"}} /> myristicafc@gmail.com
         </a>
       </motion.div>
 

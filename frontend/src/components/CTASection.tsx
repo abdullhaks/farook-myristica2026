@@ -92,7 +92,7 @@ export default function CTASection({ onRegisterClick }: CTASectionProps) {
           <div className="flex flex-col gap-12 w-full mt-6">
             {/* Sponsors */}
             <div className="flex flex-col items-center w-full">
-              <span className="text-emerald-400 text-xs tracking-[0.4em] uppercase mb-8 font-semibold drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]">Official Sponsors</span>
+              <span className="text-emerald-400 text-xs tracking-[0.4em] uppercase mb-8 font-semibold drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]">Season 1-4 Official Sponsors</span>
               <div className="flex flex-wrap justify-center gap-4 md:gap-6 w-full">
                 {SPONSORS.map((name, i) => (
                   <div key={i} className="px-5 py-2.5 rounded-xl border border-emerald-500/30 bg-emerald-950/20 backdrop-blur-md shadow-[0_0_20px_rgba(52,211,153,0.15)] hover:shadow-[0_0_30px_rgba(52,211,153,0.4)] hover:border-emerald-400/50 transition-all duration-300 cursor-default">
@@ -106,7 +106,7 @@ export default function CTASection({ onRegisterClick }: CTASectionProps) {
 
             {/* Torch Bearers */}
             <div className="flex flex-col items-center w-full">
-              <span className="text-white text-xs tracking-[0.4em] uppercase mb-8 font-semibold drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">The Torch Bearers</span>
+              <span className="text-white text-xs tracking-[0.4em] uppercase mb-8 font-semibold drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">Season 1-4 Torch Bearers</span>
               <div className="flex flex-wrap justify-center gap-3 md:gap-4 w-full">
                 {The_torch_bearers.map((name, i) => (
                   <div key={i} className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:border-white/30 hover:bg-white/10 transition-all duration-300 cursor-default">

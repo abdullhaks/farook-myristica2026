@@ -118,7 +118,7 @@ export default function RegisterModal({
     const updatedData = {
       ...formData,
       eventName: selectedEvent,
-      college: isTreasureHunt ? 'Farook College' : (formData.college === 'Farook College' ? '' : formData.college),
+      college: isTreasureHunt ? 'Farook College ,Kozhikode' : (formData.college === 'Farook College ,Kozhikode' ? '' : formData.college),
     };
     
     setPaymentFile(null); // Reset payment file when event changes
@@ -441,7 +441,7 @@ export default function RegisterModal({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold tracking-wider uppercase text-white/60 mb-1">
-                    Department
+                    Course
                   </label>
                   <input
                     type="text"
