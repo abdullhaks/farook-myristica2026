@@ -50,6 +50,10 @@ export class RegistrationRepository {
     return this.registrationModel.findByIdAndDelete(id).exec();
   }
 
+  async updatePaymentStatus(id: string, status: string): Promise<Registration | null> {
+    return this.registrationModel.findByIdAndUpdate(id, { paymentStatus: status }, { new: true }).exec();
+  }
+
   async getDashboardStats() {
     const totalRegistrations = await this.registrationModel.countDocuments().exec();
 

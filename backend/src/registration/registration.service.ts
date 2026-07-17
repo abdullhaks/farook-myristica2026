@@ -47,6 +47,10 @@ export class RegistrationService {
     return this.registrationRepository.delete(id);
   }
 
+  async updatePaymentStatus(id: string, status: string) {
+    return this.registrationRepository.updatePaymentStatus(id, status);
+  }
+
   async getDashboardStats() {
     return this.registrationRepository.getDashboardStats();
   }

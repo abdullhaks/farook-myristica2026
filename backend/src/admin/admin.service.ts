@@ -36,7 +36,7 @@ export class AdminService implements OnModuleInit {
   async login(admin: any) {
     const payload = { username: admin.username, sub: admin._id };
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign(payload, { expiresIn: '10m' }),
       refresh_token: this.jwtService.sign(payload, { expiresIn: '2d' }),
     };
   }

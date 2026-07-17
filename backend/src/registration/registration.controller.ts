@@ -115,4 +115,22 @@ export class RegistrationController {
       message: 'Registration deleted successfully',
     };
   }
+
+  // Update payment status
+  @UseGuards(JwtAuthGuard)
+  @Post(':id/payment')
+  async updatePaymentStatus(
+    @Param('id') id: string,
+    @Body() dto: { status: 'pending' | 'verified' | 'rejected' }
+  ) {
+    const updated = await this.registrationService.updatePaymentStatus(id, dto.status);
+    if (!updated) {
+      throw new BadRequestException('Registration not found');
+    }
+    return {
+      success: true,
+      message: 'Payment status updated successfully',
+      data: updated
+    };
+  }
 }

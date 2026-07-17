@@ -47,4 +47,9 @@ export class RegistrationDto {
   whatsapp: string;
   eventName: typeof REGISTERABLE_EVENTS[number];
   paymentScreenshot?: string;
+  paymentStatus?: 'pending' | 'verified' | 'rejected';
+}
+
+export class UpdatePaymentStatusDto {
+  status: 'pending' | 'verified' | 'rejected';
 }

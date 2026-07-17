@@ -14,6 +14,7 @@ export interface EventCardProps {
   registerUrl?: string;
   layout?: 'row' | 'col';
   onRegisterClick?: () => void;
+  hideRegister?: boolean;
 }
 
 export default function EventCard({
@@ -30,6 +31,7 @@ export default function EventCard({
   registerUrl = '#register',
   layout = 'col',
   onRegisterClick,
+  hideRegister = false,
 }: EventCardProps) {
   const CardContent = () => {
     const isExternal = registerUrl.startsWith('http');
@@ -88,22 +90,24 @@ export default function EventCard({
           </div>
         )}
 
-        <motion.a
-          href={isExternal ? registerUrl : undefined}
-          target={isExternal ? "_blank" : undefined}
-          rel={isExternal ? "noopener noreferrer" : undefined}
-          onClick={(e) => {
-            if (onRegisterClick) {
-              e.preventDefault();
-              onRegisterClick();
-            }
-          }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="inline-block bg-foreground text-background rounded-lg px-6 py-2.5 text-sm font-semibold transition-transform cursor-pointer text-center"
-        >
-          REGISTER
-        </motion.a>
+        {!hideRegister && (
+          <motion.a
+            href={isExternal ? registerUrl : undefined}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+            onClick={(e) => {
+              if (onRegisterClick) {
+                e.preventDefault();
+                onRegisterClick();
+              }
+            }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-block bg-foreground text-background rounded-lg px-6 py-2.5 text-sm font-semibold transition-transform cursor-pointer text-center"
+          >
+            REGISTER
+          </motion.a>
+        )}
       </>
     );
   };

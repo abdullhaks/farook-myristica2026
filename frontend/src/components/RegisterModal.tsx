@@ -207,7 +207,7 @@ export default function RegisterModal({
     try {
       let validatedData = result.data;
       
-      const requiresPayment = validatedData.eventName === 'Treasure Hunt' || validatedData.eventName === 'Vegetable Printing';
+      const requiresPayment = ['Treasure Hunt', 'Vegetable Printing', 'The Big Quiz', 'The Ecological Debate'].includes(validatedData.eventName as string);
 
       // Pre-check registration to avoid uploading if already registered
       await registrationService.checkRegistration(validatedData.email, validatedData.eventName);
@@ -516,14 +516,14 @@ export default function RegisterModal({
               </div>
 
               {/* Payment Section */}
-              {(formData.eventName === 'Treasure Hunt' || formData.eventName === 'Vegetable Printing') && (
+              {['Treasure Hunt', 'Vegetable Printing', 'The Big Quiz', 'The Ecological Debate'].includes(formData.eventName || '') && (
                 <div className="bg-white/5 border border-white/10 rounded-xl p-4 mt-4 space-y-4">
                   <div className="flex items-start gap-4">
                     <button type="button" onClick={() => setIsQrModalOpen(true)} className="focus:outline-none hover:opacity-80 transition-opacity">
                       <img src={Qrcode} alt="Payment QR" className="w-24 h-24 object-contain rounded-lg bg-white p-1" />
                     </button>
                     <div>
-                      <h4 className="text-sm font-bold text-white mb-1">Registration Fee: {formData.eventName === 'Treasure Hunt' ? '₹100 per team' : '₹50'}</h4>
+                      <h4 className="text-sm font-bold text-white mb-1">Registration Fee: {['Treasure Hunt', 'The Big Quiz'].includes(formData.eventName || '') ? '₹100' : '₹50'}</h4>
                       <p className="text-xs text-white/70 mb-1">Bank: South Indian Bank</p>
                       <div className="flex items-center gap-2 mb-1">
                         <p className="text-xs text-white/70">Acc Number: 0427053000008968</p>

@@ -91,6 +91,21 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleUpdatePayment = async (id: string, status: string) => {
+    try {
+      const res = await request(`/register/${id}/payment`, {
+        method: 'POST',
+        body: JSON.stringify({ status })
+      });
+      if (res.success) {
+        message.success(`Payment status updated to ${status}`);
+        fetchRegistrations(page, eventFilter);
+      }
+    } catch (error: any) {
+      message.error(error.message || 'Failed to update payment status');
+    }
+  };
+
   const handleExport = async () => {
     setExporting(true);
     try {
@@ -139,7 +154,25 @@ export default function AdminDashboard() {
       title: 'Payment', 
       dataIndex: 'paymentScreenshot', 
       key: 'paymentScreenshot',
-      render: (url: string) => url ? <Image width={40} height={40} src={url} className="rounded object-cover" preview={{ mask: <span className="text-[10px]">View</span> }} /> : <span className="text-zinc-600 text-xs">N/A</span>
+      render: (url: string, record: any) => {
+        if (!url) return <span className="text-zinc-600 text-xs">N/A</span>;
+        return (
+          <div className="flex items-center gap-3">
+            <Image width={40} height={40} src={url} className="rounded object-cover" preview={{ mask: <span className="text-[10px]">View</span> }} />
+            <div className="flex flex-col gap-1">
+              <Tag color={record.paymentStatus === 'verified' ? 'success' : record.paymentStatus === 'rejected' ? 'error' : 'warning'} className="m-0 text-center text-[10px]">
+                {record.paymentStatus?.toUpperCase() || 'PENDING'}
+              </Tag>
+              {(record.paymentStatus === 'pending' || !record.paymentStatus) && (
+                <div className="flex gap-1">
+                  <Button size="small" type="primary" onClick={() => handleUpdatePayment(record._id, 'verified')} className="text-[10px] h-5 px-1 bg-green-600">Verify</Button>
+                  <Button size="small" danger onClick={() => handleUpdatePayment(record._id, 'rejected')} className="text-[10px] h-5 px-1">Reject</Button>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      }
     },
     {
       title: 'Actions',

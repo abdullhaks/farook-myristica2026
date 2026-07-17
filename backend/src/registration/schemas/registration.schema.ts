@@ -29,6 +29,9 @@ export class Registration extends Document {
 
   @Prop({ required: false })
   paymentScreenshot?: string;
+
+  @Prop({ required: false, enum: ['pending', 'verified', 'rejected'], default: 'pending' })
+  paymentStatus?: string;
 }
 
 export const RegistrationSchema = SchemaFactory.createForClass(Registration);

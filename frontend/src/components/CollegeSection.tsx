@@ -9,7 +9,7 @@ export default function CollegeSection() {
           {...fadeUp(0)}
           className="text-2xl md:text-3xl font-medium mb-6"
         >
-          About Farook College
+          About Farook College (Autonomous)
         </motion.h2>
 
         <motion.p
