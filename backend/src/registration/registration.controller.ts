@@ -46,20 +46,25 @@ export class RegistrationController {
     });
 
     return new Promise((resolve, reject) => {
-      const uploadStream = cloudinary.uploader.upload_stream(
-        { folder: 'myristica_payments' },
-        (error, result) => {
-          if (error || !result) {
-            console.error('Cloudinary upload error:', error);
-            return reject(new BadRequestException('Failed to upload image'));
+      try {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          { folder: 'myristica_payments' },
+          (error, result) => {
+            if (error || !result) {
+              console.error('Cloudinary upload error:', error);
+              return reject(new BadRequestException('Failed to upload image'));
+            }
+            resolve({
+              success: true,
+              url: result.secure_url,
+            });
           }
-          resolve({
-            success: true,
-            url: result.secure_url,
-          });
-        }
-      );
-      uploadStream.end(file.buffer);
+        );
+        uploadStream.end(file.buffer);
+      } catch (err) {
+        console.error('Cloudinary setup error:', err);
+        reject(new BadRequestException('Image upload service is not configured properly (missing environment variables)'));
+      }
     });
   }
 
