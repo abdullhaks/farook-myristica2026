@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Table, Button, Select, Popconfirm, message, Tag, Spin, Image } from 'antd';
-import { DeleteOutlined, PhoneOutlined, WhatsAppOutlined, MailOutlined, DownloadOutlined, UsergroupAddOutlined, FireOutlined, BankOutlined, RiseOutlined } from '@ant-design/icons';
+import { Table, Button, Select, Popconfirm, message, Tag, Spin, Image, Modal, Descriptions, ConfigProvider, theme } from 'antd';
+import { DeleteOutlined, PhoneOutlined, WhatsAppOutlined, MailOutlined, DownloadOutlined, UsergroupAddOutlined, FireOutlined, BankOutlined, RiseOutlined, EyeOutlined, ReloadOutlined } from '@ant-design/icons';
 import { request } from '../../services/apiClient';
 import * as XLSX from 'xlsx';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
@@ -35,6 +35,8 @@ export default function AdminDashboard() {
   const [page, setPage] = useState(1);
   const [eventFilter, setEventFilter] = useState('All');
   const [exporting, setExporting] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState<any>(null);
 
   const [stats, setStats] = useState<any>(null);
   const [statsLoading, setStatsLoading] = useState(false);
@@ -179,6 +181,7 @@ export default function AdminDashboard() {
       key: 'actions',
       render: (_: any, record: any) => (
         <div className="flex gap-2">
+          <Button type="default" shape="circle" icon={<EyeOutlined />} size="small" onClick={() => { setSelectedRecord(record); setIsModalVisible(true); }} className="bg-blue-500/10 border-blue-500/30 hover:border-blue-500 text-blue-500" title="View Details" />
           <a href={`tel:${record.phone}`} title="Call">
             <Button type="default" shape="circle" icon={<PhoneOutlined />} size="small" className="bg-white/5 border-white/10 hover:border-white/30 text-white" />
           </a>
@@ -362,6 +365,16 @@ export default function AdminDashboard() {
             >
               Export to Excel
             </Button>
+            <Button
+              type="default"
+              icon={<ReloadOutlined />}
+              onClick={() => { fetchRegistrations(page, eventFilter); fetchStats(); }}
+              loading={loading || statsLoading}
+              size="large"
+              className="w-full sm:w-auto !bg-zinc-800 hover:!bg-zinc-700 !border-white/10 !text-white font-semibold rounded-xl"
+            >
+              Refresh
+            </Button>
           </div>
         </div>
 
@@ -385,6 +398,58 @@ export default function AdminDashboard() {
           />
         </div>
       </motion.div>
+
+      <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+        <Modal
+          title={<span className="text-xl font-serif italic text-white">Application Details</span>}
+          open={isModalVisible}
+          onCancel={() => setIsModalVisible(false)}
+          footer={null}
+          width={700}
+          styles={{
+            content: { backgroundColor: '#18181b', border: '1px solid rgba(255,255,255,0.1)' },
+            header: { backgroundColor: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '16px' }
+          }}
+          closeIcon={<span className="text-zinc-400 hover:text-white">✕</span>}
+        >
+          {selectedRecord && (
+            <Descriptions
+              column={1}
+              bordered
+              size="small"
+              labelStyle={{ color: '#a1a1aa', backgroundColor: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.05)', width: '150px' }}
+              contentStyle={{ color: '#fff', backgroundColor: 'transparent', borderColor: 'rgba(255,255,255,0.05)' }}
+            >
+              <Descriptions.Item label="Name">{selectedRecord.name}</Descriptions.Item>
+              <Descriptions.Item label="Email">{selectedRecord.email}</Descriptions.Item>
+              <Descriptions.Item label="Phone">{selectedRecord.phone}</Descriptions.Item>
+              <Descriptions.Item label="WhatsApp">{selectedRecord.whatsapp}</Descriptions.Item>
+              <Descriptions.Item label="College">{selectedRecord.college}</Descriptions.Item>
+              <Descriptions.Item label="Event Name">{selectedRecord.eventName}</Descriptions.Item>
+              {selectedRecord.participants && selectedRecord.participants.length > 0 && (
+                <Descriptions.Item label="Participants">
+                  {selectedRecord.participants.map((p: any, idx: number) => (
+                    <div key={idx} className="mb-1">{idx + 1}. {p.name} ({p.phone}) - {p.college}</div>
+                  ))}
+                </Descriptions.Item>
+              )}
+              <Descriptions.Item label="Status">
+                <Tag color={selectedRecord.paymentStatus === 'verified' ? 'success' : selectedRecord.paymentStatus === 'rejected' ? 'error' : 'warning'}>
+                  {selectedRecord.paymentStatus?.toUpperCase() || 'PENDING'}
+                </Tag>
+              </Descriptions.Item>
+              {selectedRecord.paymentScreenshot && (
+                <Descriptions.Item label="Payment Proof">
+                  <Image width={200} src={selectedRecord.paymentScreenshot} className="rounded" />
+                </Descriptions.Item>
+              )}
+              <Descriptions.Item label="Date">
+                {new Date(selectedRecord.createdAt).toLocaleString()}
+              </Descriptions.Item>
+            </Descriptions>
+          )}
+        </Modal>
+      </ConfigProvider>
     </div>
   );
 }

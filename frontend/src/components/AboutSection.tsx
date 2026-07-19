@@ -76,7 +76,7 @@ export default function AboutSection() {
           <div className="text-white/70 font-light text-sm sm:text-base md:text-lg leading-relaxed space-y-6">
             <p>
               Myristica — The Ecological Fiesta is a state-level ecological
-              festival organized by the students of Department of Botany, Farook College, Kozhikode, in collaboration with the Malabar Natural History Society. Named after the threatened tree Myristica malabarica in the IUCN Redlist, this festival roots itself in Kerala's rich biodiversity.
+              festival organized by the students of Department of Botany, Farook College, Kozhikode, in collaboration with the Malabar Natural History Society. Named after the threatened tree <i style={{ color: "rgba(220, 144, 255, 1)" }}>Myristica malabarica</i> in the IUCN Redlist, this festival roots itself in Kerala's rich biodiversity.
             </p>
             <p>
               After four successful seasons between 2016 and 2020, Myristica

@@ -224,6 +224,10 @@ html {
   color: white !important;
 }
 
+.dark-table .ant-table-tbody>tr.ant-table-row-selected>td {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
 .dark-table .ant-table-tbody>tr:hover>td {
   background: rgba(255, 255, 255, 0.05) !important;
 }
