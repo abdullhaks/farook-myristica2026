@@ -406,8 +406,8 @@ export default function AdminDashboard() {
           onCancel={() => setIsModalVisible(false)}
           footer={null}
           width={700}
+          className="dark-modal"
           styles={{
-            content: { backgroundColor: '#18181b', border: '1px solid rgba(255,255,255,0.1)' },
             header: { backgroundColor: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '16px' }
           }}
           closeIcon={<span className="text-zinc-400 hover:text-white">✕</span>}
