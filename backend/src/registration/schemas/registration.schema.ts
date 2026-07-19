@@ -27,6 +27,9 @@ export class Registration extends Document {
   @Prop({ required: true })
   eventName: string;
 
+  @Prop({ type: [String], default: [] })
+  teamMembers?: string[];
+
   @Prop({ required: false })
   paymentScreenshot?: string;
 

@@ -25,6 +25,7 @@ const registerSchema = z.object({
   phone: z.string().regex(/^\d{10}$/, "Phone number must be exactly 10 digits"),
   whatsapp: z.string().regex(/^\d{10}$/, "WhatsApp number must be exactly 10 digits"),
   eventName: z.string().min(1, "Please select an event"),
+  teamMembers: z.array(z.string().trim().min(1, "Member name is required")).optional(),
 }).refine((data) => {
   if (data.eventName === 'Treasure Hunt') {
     // Ensure college is Farook College (case-insensitive check)
@@ -34,6 +35,22 @@ const registerSchema = z.object({
 }, {
   message: "Treasure Hunt is restricted to Farook College students only.",
   path: ["college"]
+}).refine((data) => {
+  if (data.eventName === 'Treasure Hunt') {
+    return data.teamMembers && data.teamMembers.length === 3;
+  }
+  return true;
+}, {
+  message: "Treasure Hunt requires exactly a 4-member team (you + 3 members).",
+  path: ["teamMembers"]
+}).refine((data) => {
+  if (data.eventName === 'The Big Quiz') {
+    return !data.teamMembers || data.teamMembers.length <= 1;
+  }
+  return true;
+}, {
+  message: "The Big Quiz can have a maximum of 2 members (you + 1 optional member).",
+  path: ["teamMembers"]
 });
 
 type RegisterFormData = z.infer<typeof registerSchema>;
@@ -58,6 +75,7 @@ export default function RegisterModal({
     phone: '',
     whatsapp: '',
     eventName: '',
+    teamMembers: [],
   });
 
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -101,6 +119,7 @@ export default function RegisterModal({
         phone: '',
         whatsapp: '',
         eventName: selectedEvent,
+        teamMembers: [],
       });
       setPaymentFile(null);
       setValidationErrors([]);
@@ -119,6 +138,7 @@ export default function RegisterModal({
       ...formData,
       eventName: selectedEvent,
       college: isTreasureHunt ? 'Farook College ,Kozhikode' : (formData.college === 'Farook College ,Kozhikode' ? '' : formData.college),
+      teamMembers: [], // Reset team members when event changes
     };
     
     setPaymentFile(null); // Reset payment file when event changes
@@ -138,6 +158,14 @@ export default function RegisterModal({
     if (touchedFields[name] || submitAttempted) {
       runLiveValidation(updatedData);
     }
+  };
+
+  const handleTeamMemberChange = (index: number, value: string) => {
+    const updatedMembers = [...(formData.teamMembers || [])];
+    updatedMembers[index] = value;
+    const updatedData = { ...formData, teamMembers: updatedMembers };
+    setFormData(updatedData);
+    if (submitAttempted) runLiveValidation(updatedData);
   };
 
   const handleInputBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -179,6 +207,7 @@ export default function RegisterModal({
     allTouched.phone = true;
     allTouched.whatsapp = true;
     allTouched.eventName = true;
+    allTouched.teamMembers = true;
     setTouchedFields(allTouched);
 
     // Run zod validation
@@ -248,6 +277,7 @@ export default function RegisterModal({
             department: validatedData.department,
             year: validatedData.year,
             phone: validatedData.phone,
+            team_members: validatedData.teamMembers?.filter(Boolean).length ? validatedData.teamMembers.filter(Boolean).join(', ') : 'None',
           },
           import.meta.env.VITE_EMAILJS_USER_ID
         );
@@ -276,7 +306,7 @@ export default function RegisterModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pt-[500px] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pt-[650px] overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -386,6 +416,60 @@ export default function RegisterModal({
                   </span>
                 )}
               </div>
+
+              {/* Team Members */}
+              {formData.eventName === 'Treasure Hunt' && (
+                <div className="space-y-4">
+                  <div className="pt-2">
+                    <h3 className="text-sm font-bold text-white mb-2">Team Members (3 Required)</h3>
+                    {[0, 1, 2].map((idx) => (
+                      <div key={idx} className="mb-3">
+                        <label className="block text-xs font-semibold tracking-wider uppercase text-white/60 mb-1">
+                          Member {idx + 2} Name
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.teamMembers?.[idx] || ''}
+                          onChange={(e) => handleTeamMemberChange(idx, e.target.value)}
+                          placeholder={`e.g., Member ${idx + 2} Name`}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 transition-all"
+                          required
+                        />
+                      </div>
+                    ))}
+                    {(touchedFields.teamMembers || submitAttempted) && fieldErrors.teamMembers && (
+                      <span className="text-xs text-red-400 mt-1 block">
+                        {fieldErrors.teamMembers}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {formData.eventName === 'The Big Quiz' && (
+                <div className="space-y-4">
+                  <div className="pt-2">
+                    <h3 className="text-sm font-bold text-white mb-2">Team Member (Optional)</h3>
+                    <div className="mb-3">
+                      <label className="block text-xs font-semibold tracking-wider uppercase text-white/60 mb-1">
+                        Member 2 Name (Leave blank if participating individually)
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.teamMembers?.[0] || ''}
+                        onChange={(e) => handleTeamMemberChange(0, e.target.value)}
+                        placeholder="e.g., Member 2 Name"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 transition-all"
+                      />
+                    </div>
+                    {(touchedFields.teamMembers || submitAttempted) && fieldErrors.teamMembers && (
+                      <span className="text-xs text-red-400 mt-1 block">
+                        {fieldErrors.teamMembers}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
 
               {/* College Input */}
               <div>

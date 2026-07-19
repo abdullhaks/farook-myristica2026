@@ -14,6 +14,7 @@ export interface RegisterPayload {
   whatsapp: string;
   eventName: string;
   paymentScreenshot?: string;
+  teamMembers?: string[];
 }
 
 export interface RegisterResponse {

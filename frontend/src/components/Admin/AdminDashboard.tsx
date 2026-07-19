@@ -122,6 +122,7 @@ export default function AdminDashboard() {
           Department: item.department,
           Year: item.year,
           Event: item.eventName,
+          TeamMembers: item.teamMembers && item.teamMembers.length > 0 ? item.teamMembers.join(', ') : 'None',
           RegisteredAt: new Date(item.createdAt).toLocaleString(),
         }));
 
@@ -426,10 +427,10 @@ export default function AdminDashboard() {
               <Descriptions.Item label="WhatsApp">{selectedRecord.whatsapp}</Descriptions.Item>
               <Descriptions.Item label="College">{selectedRecord.college}</Descriptions.Item>
               <Descriptions.Item label="Event Name">{selectedRecord.eventName}</Descriptions.Item>
-              {selectedRecord.participants && selectedRecord.participants.length > 0 && (
-                <Descriptions.Item label="Participants">
-                  {selectedRecord.participants.map((p: any, idx: number) => (
-                    <div key={idx} className="mb-1">{idx + 1}. {p.name} ({p.phone}) - {p.college}</div>
+              {selectedRecord.teamMembers && selectedRecord.teamMembers.length > 0 && (
+                <Descriptions.Item label="Team Members">
+                  {selectedRecord.teamMembers.map((name: string, idx: number) => (
+                    <div key={idx} className="mb-1">{idx + 2}. {name}</div>
                   ))}
                 </Descriptions.Item>
               )}
